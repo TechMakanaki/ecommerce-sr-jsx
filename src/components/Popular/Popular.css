@@ -1,0 +1,78 @@
+*{
+    text-decoration: none;
+}
+.popular {
+    box-shadow: 0 0 5px #ccc;
+    padding: 15px 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-family: poppins;
+    
+}
+.popular h1{
+    color: #000000;
+    font-size: 40px;
+    font-weight: 600;
+}
+.popular-item{
+    min-width: 300px;
+    min-height: 400px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 2px 8px 20px #ddd;
+    margin: 10px;
+    transition: 0.5s linear;
+}
+.popular-item:hover{
+    box-shadow: none;
+}
+.popular-item img{
+    max-width: 300px;
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    display: block;
+    object-fit: cover;
+}
+.popular-item .data-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+.data-name a {
+    color: #000000;
+    text-decoration: none;
+}
+.data-name a:hover {
+    color: #711129;
+}
+.price{
+    margin: 10px 0;
+    color: rgb(1, 1, 3);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.add-cart{
+    outline: none;
+    border: none;
+    color: #ffffff;
+    width: 100%;
+    height: 35px;
+    display: block;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    margin: 15px 0;
+    font-size: 16px;
+    font-weight: 500;
+    background: #333;
+    cursor: pointer;
+    font-family: poppins;
+}
+.add-cart:focus{
+    background-color: #711129;
+}

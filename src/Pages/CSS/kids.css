@@ -1,0 +1,9 @@
+.popular {
+    box-shadow: 0 0 5px #ccc;
+    padding: 15px 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-family: poppins;
+}
