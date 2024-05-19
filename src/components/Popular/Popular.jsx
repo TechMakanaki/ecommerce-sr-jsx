@@ -8,6 +8,7 @@ const Popular = () => {
   const [dataProduct, setDataProduct] = useState([]);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const [cartMessage, setCartMessage] = useState({ id: null, message: '' });
 
   useEffect(() => {
     axios
@@ -18,6 +19,14 @@ const Popular = () => {
       })
       .catch((error) => setError(error));
   }, []);
+  
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setCartMessage({ id: item.id, message: `Item "${item.attributes.Product}" added to cart` });
+    setTimeout(() => {
+      setCartMessage({ id: null, message: '' });
+    }, 3000); // Hide the message after 3 seconds
+  };
 
   if (error) {
     return <div>An error occurred: {error.message}</div>;
@@ -37,6 +46,7 @@ const Popular = () => {
                 {attributes && <Link to={`/product-details/${id}`}>{attributes.Product}</Link>}
               </div>
               <div className='price'>Price: ${attributes && attributes.price}</div>
+              {cartMessage.id === id && <div className="cart-message">{cartMessage.message}</div>}
               <button className="add-cart" onClick={() => addToCart({ id, attributes })}>Add to cart</button>
             </div>
           </div>
