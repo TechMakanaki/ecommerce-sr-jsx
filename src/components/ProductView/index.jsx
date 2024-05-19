@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useProductView from './useProductView';
 import Navbar from '../Navbar/Navbar';
@@ -9,6 +9,7 @@ import './style.css';
 const ProductView = () => {
   const { product, error } = useProductView();
   const { addToCart } = useCart();
+  const [cartMessage, setCartMessage] = useState({ id: null, message: '' });
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -18,7 +19,7 @@ const ProductView = () => {
     return <div>Loading...</div>;
   }
 
-  const { attributes } = product.data;
+  const { id, attributes } = product.data;
   const productName = attributes?.Product || "";
   const productPrice = attributes?.price || "";
   const productDescription = attributes?.description || '';
@@ -26,13 +27,12 @@ const ProductView = () => {
 
   const formattedPrice = parseFloat(productPrice).toFixed(2);
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.data.id,
-      productName,
-      productPrice: formattedPrice,
-      imageURL
-    });
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setCartMessage({ id: item.id, message: `Item "${item.attributes.Product}" added to cart` });
+    setTimeout(() => {
+      setCartMessage({ id: null, message: '' });
+    }, 3000); // Hide the message after 3 seconds
   };
 
   return (
@@ -52,7 +52,8 @@ const ProductView = () => {
               SKU: {productName}
             </p>
             <div className="product-description">Description: {productDescription}</div>
-            <button className='add-cart' onClick={handleAddToCart}>
+            {cartMessage.id === id && <div className="cart-message">{cartMessage.message}</div>}
+            <button className='add-cart' onClick={() => handleAddToCart({ id, attributes })}>
               Add to cart
             </button>
             <Link to="/">Back to Products</Link>
