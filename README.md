@@ -2,8 +2,10 @@
 
 ## Available Scripts
 
-In the project directory, you can run:
-The `npm install` to install the node modules.
+### `npm install`
+
+In the project directory, you will run:
+the `npm install` to install the node modules and its dependency.
 
 ### `npm start`
 
