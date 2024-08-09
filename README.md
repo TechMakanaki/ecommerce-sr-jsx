@@ -5,7 +5,7 @@
 ### `npm install`
 
 In the project directory, you will run:
-the `npm install` to install the node modules and its dependency.
+the `npm install` to install the node modules and its dependency. This is important as the node modules package cannot be uploaded here on the repository. 
 
 ### `npm start`
 
