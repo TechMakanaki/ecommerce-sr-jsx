@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from '../../components/AuthContext';
 
 const Navbar = () => {
-    const { isAuthenticated, logout } = useContext(AuthContext); // Destructure logout if used elsewhere
+    const { isAuthenticated, logout } = useContext(AuthContext);
 
     const [toggle, setToggle] = useState(false);
     const [menu, setMenu] = useState('shop');
@@ -27,23 +27,32 @@ const Navbar = () => {
         <div className="navbar">
             {/* Menu icon for mobile view */}
             <div className="menu" onClick={menuToggle}>
-                <img src={Menu} alt="Menu" width="20"/>
+                <img src={Menu} alt="Menu" width="20" />
             </div>
-            
+
             {/* Logo */}
             <div className="nav-logo">
                 <h4><Link to="/">WeMart</Link></h4>
             </div>
-            
+
             {/* Navigation Links */}
             <nav>
                 <ul className={toggle ? "toggle" : ""}>
                     {['shop', 'mens', 'womens', 'kids'].map((category) => (
-                        <li key={category} onClick={() => setMenu(category)}>
-                            <Link style={{ textDecoration: 'none', color: 'black' }} to={`/${category === 'shop' ? '' : category}`}>
+                        <li 
+                            key={category} 
+                            className={menu === category ? 'active' : ''}
+                            onClick={() => {
+                                setMenu(category);
+                                setToggle(false); // Close the menu after selecting an item
+                            }}
+                        >
+                            <Link 
+                                style={{ textDecoration: 'none', color: 'black' }} 
+                                to={`/${category === 'shop' ? '' : category}`}
+                            >
                                 {category.charAt(0).toUpperCase() + category.slice(1)}
                             </Link>
-                            {menu === category && <hr />}
                         </li>
                     ))}
                     <li className="close" onClick={menuToggle}>
@@ -51,7 +60,7 @@ const Navbar = () => {
                     </li>
                 </ul>
             </nav>
-            
+
             {/* Login/Logout and Cart Section */}
             <div className="nav-login-cart">
                 {isAuthenticated ? (
